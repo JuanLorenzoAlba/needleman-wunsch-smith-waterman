@@ -1,0 +1,119 @@
+.root {
+  min-height: 100vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.root > * + * {
+  margin-top: 2rem;
+}
+@media (min-width: 640px) {
+  .root {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.header > * + * {
+  margin-top: 0.25rem;
+}
+.title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+@media (min-width: 640px) {
+  .title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+.subtitle {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #71717a;
+}
+
+.controls {
+  display: grid;
+  gap: 1rem;
+  align-items: end;
+  background-color: #fafafa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e4e4e7;
+}
+@media (min-width: 640px) {
+  .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .controls {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.input,
+.numberInput {
+  border: 1px solid #d4d4d8;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #ffffff;
+}
+.input {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.emptyState {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #71717a;
+}
+.resultsGrid {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 1024px) {
+  .resultsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.footer {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #a1a1aa;
+  padding-top: 1rem;
+  border-top: 1px solid #e4e4e7;
+}
+.footerLink {
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .controls {
+    background-color: #18181b;
+    border-color: #27272a;
+  }
+  .input,
+  .numberInput {
+    background-color: #09090b;
+    border-color: #3f3f46;
+  }
+  .footer {
+    border-color: #27272a;
+  }
+}

@@ -1,0 +1,75 @@
+.empty {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #71717a;
+}
+
+.container > * + * {
+  margin-top: 0.25rem;
+}
+.container {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.cell {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+}
+
+.legend {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.swatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+}
+
+.kindMatch {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.kindMismatch {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+.kindGap {
+  background-color: #e4e4e7;
+  color: #71717a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .kindMatch {
+    background-color: rgba(6, 78, 59, 0.5);
+    color: #6ee7b7;
+  }
+  .kindMismatch {
+    background-color: rgba(120, 53, 15, 0.5);
+    color: #fcd34d;
+  }
+  .kindGap {
+    background-color: #27272a;
+    color: #a1a1aa;
+  }
+}

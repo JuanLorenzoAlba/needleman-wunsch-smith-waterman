@@ -1,0 +1,195 @@
+.container > * + * {
+  margin-top: 0.75rem;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.scoreLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #71717a;
+}
+.scoreValue {
+  color: #27272a;
+}
+
+.tableWrapper {
+  overflow: auto;
+  border: 1px solid #e4e4e7;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 2.5rem;
+}
+.table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.gapHeader,
+.seqHeader,
+.rowHeaderBase {
+  width: 3rem;
+  height: 3rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background-color: rgba(12, 74, 110, 0.6);
+  border-radius: 0.25rem;
+}
+.gapHeader {
+  color: #ffffff;
+}
+.seqHeader {
+  color: #bae6fd;
+}
+.rowHeaderGap {
+  color: #ffffff;
+}
+.rowHeaderSeq {
+  color: #bae6fd;
+}
+
+.cellBase {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  border: 1px solid #f4f4f5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  cursor: pointer;
+}
+.cellBase:hover {
+  background-color: #f4f4f5;
+}
+.cellOptimal {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-weight: 700;
+}
+.cellHovered {
+  box-shadow: inset 0 0 0 2px #3b82f6;
+}
+.cellConsidered {
+  box-shadow: inset 0 0 0 2px #fbbf24;
+}
+.arrow {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: #a1a1aa;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 11px;
+  color: #71717a;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.legendSwatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+}
+.legendSwatchOptimal {
+  background-color: #fee2e2;
+}
+.legendSwatchHover {
+  box-shadow: inset 0 0 0 2px #3b82f6;
+}
+.legendSwatchConsidered {
+  box-shadow: inset 0 0 0 2px #fbbf24;
+}
+
+.alignmentLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.tooltipBox {
+  position: fixed;
+  z-index: 50;
+  width: 30rem;
+  border-radius: 0.5rem;
+  border: 1px solid #334155;
+  background-color: #0f172a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 1rem;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  pointer-events: none;
+}
+.tooltipTitle {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.tooltipGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.quadrant {
+  border-radius: 0.25rem;
+  padding: 0.625rem;
+}
+.quadrantActive {
+  background-color: rgba(6, 95, 70, 0.6);
+}
+.quadrantInactive {
+  background-color: rgba(30, 41, 59, 0.6);
+}
+.quadrantLabel {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .scoreValue {
+    color: #f4f4f5;
+  }
+  .tableWrapper {
+    border-color: #27272a;
+  }
+  .cellBase {
+    border-color: #27272a;
+  }
+  .cellBase:hover {
+    background-color: #27272a;
+  }
+  .cellOptimal {
+    background-color: rgba(127, 29, 29, 0.5);
+    color: #fca5a5;
+  }
+  .arrow {
+    color: #71717a;
+  }
+  .legendSwatchOptimal {
+    background-color: rgba(127, 29, 29, 0.5);
+  }
+}
