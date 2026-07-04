@@ -8,9 +8,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 .root > * + * {
   margin-top: 2rem;
 }
+
 @media (min-width: 640px) {
   .root {
     padding-left: 2rem;
@@ -21,11 +23,13 @@
 .header > * + * {
   margin-top: 0.25rem;
 }
+
 .title {
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
 }
+
 @media (min-width: 640px) {
   .title {
     font-size: 1.875rem;
@@ -35,23 +39,25 @@
 .subtitle {
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: #71717a;
+  color: var(--color-text-muted);
 }
 
 .controls {
   display: grid;
   gap: 1rem;
   align-items: end;
-  background-color: #fafafa;
+  background-color: var(--color-surface-muted);
   padding: 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #e4e4e7;
+  border: 1px solid var(--color-border);
 }
+
 @media (min-width: 640px) {
   .controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 @media (min-width: 1024px) {
   .controls {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -68,24 +74,27 @@
 
 .input,
 .numberInput {
-  border: 1px solid #d4d4d8;
+  border: 1px solid var(--color-input-border);
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
 }
+
 .input {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-mono);
 }
 
 .emptyState {
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: #71717a;
+  color: var(--color-text-muted);
 }
+
 .resultsGrid {
   display: grid;
   gap: 2rem;
 }
+
 @media (min-width: 1024px) {
   .resultsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -95,25 +104,7 @@
 .footer {
   font-size: 0.75rem;
   line-height: 1rem;
-  color: #a1a1aa;
+  color: var(--color-text-faint);
   padding-top: 1rem;
-  border-top: 1px solid #e4e4e7;
-}
-.footerLink {
-  text-decoration: underline;
-}
-
-@media (prefers-color-scheme: dark) {
-  .controls {
-    background-color: #18181b;
-    border-color: #27272a;
-  }
-  .input,
-  .numberInput {
-    background-color: #09090b;
-    border-color: #3f3f46;
-  }
-  .footer {
-    border-color: #27272a;
-  }
+  border-top: 1px solid var(--color-border);
 }

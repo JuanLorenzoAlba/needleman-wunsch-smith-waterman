@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.body {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4rem;
+  color: var(--zinc-600);
+}
+
+@media (prefers-color-scheme: dark) {
+  .body {
+    color: var(--zinc-400);
+  }
+}

@@ -1,14 +1,15 @@
 .empty {
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: #71717a;
+  color: var(--color-text-muted);
 }
 
 .container > * + * {
   margin-top: 0.25rem;
 }
+
 .container {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
@@ -18,6 +19,7 @@
   flex-wrap: wrap;
   gap: 2px;
 }
+
 .cell {
   width: 1.5rem;
   height: 1.5rem;
@@ -34,11 +36,13 @@
   font-size: 0.75rem;
   line-height: 1rem;
 }
+
 .legendItem {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
+
 .swatch {
   width: 0.75rem;
   height: 0.75rem;
@@ -47,29 +51,31 @@
 }
 
 .kindMatch {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: var(--emerald-100);
+  color: var(--emerald-800);
 }
+
 .kindMismatch {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: var(--amber-100);
+  color: var(--amber-800);
 }
+
 .kindGap {
-  background-color: #e4e4e7;
-  color: #71717a;
+  background-color: var(--zinc-200);
+  color: var(--zinc-500);
 }
 
 @media (prefers-color-scheme: dark) {
   .kindMatch {
-    background-color: rgba(6, 78, 59, 0.5);
-    color: #6ee7b7;
+    background-color: var(--emerald-900-50);
+    color: var(--emerald-300);
   }
   .kindMismatch {
-    background-color: rgba(120, 53, 15, 0.5);
-    color: #fcd34d;
+    background-color: var(--amber-900-50);
+    color: var(--amber-300);
   }
   .kindGap {
-    background-color: #27272a;
-    color: #a1a1aa;
+    background-color: var(--zinc-800);
+    color: var(--zinc-400);
   }
 }

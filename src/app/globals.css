@@ -3,24 +3,90 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Tipografía */
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Paleta base (no cambia con el tema) */
+  --zinc-50: #fafafa;
+  --zinc-100: #f4f4f5;
+  --zinc-200: #e4e4e7;
+  --zinc-300: #d4d4d8;
+  --zinc-400: #a1a1aa;
+  --zinc-500: #71717a;
+  --zinc-600: #52525b;
+  --zinc-700: #3f3f46;
+  --zinc-800: #27272a;
+  --zinc-900: #18181b;
+  --zinc-950: #09090b;
+
+  --red-100: #fee2e2;
+  --red-300: #fca5a5;
+  --red-700: #b91c1c;
+  --red-900-50: rgba(127, 29, 29, 0.5);
+
+  --amber-100: #fef3c7;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-800: #92400e;
+  --amber-900-50: rgba(120, 53, 15, 0.5);
+
+  --emerald-100: #d1fae5;
+  --emerald-300: #6ee7b7;
+  --emerald-800: #065f46;
+  --emerald-800-60: rgba(6, 95, 70, 0.6);
+  --emerald-900-50: rgba(6, 78, 59, 0.5);
+
+  --sky-200: #bae6fd;
+  --sky-900-60: rgba(12, 74, 110, 0.6);
+
+  --slate-700: #334155;
+  --slate-800-60: rgba(30, 41, 59, 0.6);
+  --slate-900: #0f172a;
+
+  --blue-500: #3b82f6;
+
+  /* Tokens semánticos (sí cambian con el tema) */
+  --color-text: var(--zinc-800);
+  --color-text-muted: var(--zinc-500);
+  --color-text-faint: var(--zinc-400);
+  --color-border: var(--zinc-200);
+  --color-border-subtle: var(--zinc-100);
+  --color-surface: #ffffff;
+  --color-surface-muted: var(--zinc-50);
+  --color-hover: var(--zinc-100);
+  --color-input-border: var(--zinc-300);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --color-text: var(--zinc-100);
+    --color-text-faint: var(--zinc-500);
+    --color-border: var(--zinc-800);
+    --color-border-subtle: var(--zinc-800);
+    --color-surface: var(--zinc-950);
+    --color-surface-muted: var(--zinc-900);
+    --color-hover: var(--zinc-800);
+    --color-input-border: var(--zinc-700);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }

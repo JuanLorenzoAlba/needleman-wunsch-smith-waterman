@@ -1,0 +1,18 @@
+.quadrant {
+  border-radius: 0.25rem;
+  padding: 0.625rem;
+}
+
+.quadrantActive {
+  background-color: var(--emerald-800-60);
+}
+
+.quadrantInactive {
+  background-color: var(--slate-800-60);
+}
+
+.quadrantLabel {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

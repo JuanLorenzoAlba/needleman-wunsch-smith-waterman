@@ -1,0 +1,156 @@
+.container > * + * {
+  margin-top: 0.75rem;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.scoreLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-text-muted);
+}
+
+.scoreValue {
+  color: var(--color-text);
+}
+
+.tableWrapper {
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 2.5rem;
+}
+
+.table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.gapHeader,
+.seqHeader,
+.rowHeaderBase {
+  width: 3rem;
+  height: 3rem;
+  font-family: var(--font-mono);
+  background-color: var(--sky-900-60);
+  border-radius: 0.25rem;
+}
+
+.gapHeader {
+  color: #ffffff;
+}
+
+.seqHeader {
+  color: var(--sky-200);
+}
+
+.rowHeaderGap {
+  color: #ffffff;
+}
+
+.rowHeaderSeq {
+  color: var(--sky-200);
+}
+
+.cellBase {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  border: 1px solid var(--color-border-subtle);
+  font-family: var(--font-mono);
+  cursor: pointer;
+}
+
+.cellBase:hover {
+  background-color: var(--color-hover);
+}
+
+.cellOptimal {
+  background-color: var(--red-100);
+  color: var(--red-700);
+  font-weight: 700;
+}
+
+.cellHovered {
+  box-shadow: inset 0 0 0 2px var(--blue-500);
+}
+
+.cellConsidered {
+  box-shadow: inset 0 0 0 2px var(--amber-400);
+}
+
+.arrow {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--color-text-faint);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.legendSwatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+}
+
+.legendSwatchOptimal {
+  background-color: var(--red-100);
+}
+
+.legendSwatchHover {
+  box-shadow: inset 0 0 0 2px var(--blue-500);
+}
+
+.legendSwatchConsidered {
+  box-shadow: inset 0 0 0 2px var(--amber-400);
+}
+
+.alignmentLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cellOptimal {
+    background-color: var(--red-900-50);
+    color: var(--red-300);
+  }
+  .legendSwatchOptimal {
+    background-color: var(--red-900-50);
+  }
+}

@@ -1,4 +1,4 @@
-import styles from "@/styles/AlignmentView.module.css";
+import styles from "./alignmentView.module.css";
 
 interface AlignmentViewProps {
   alignedA: string;

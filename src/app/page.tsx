@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { needlemanWunsch, smithWaterman, ScoreParams } from "@/lib/align";
+import { needlemanWunsch, smithWaterman } from "@/helpers/align";
+import type { ScoreParams } from "@/interfaces/align.interface";
 import MatrixView from "@/components/MatrixView";
+import AlgorithmInfo from "@/components/AlgorithmInfo";
 import styles from "@/styles/Home.module.css";
 
 const DEFAULT_A = "GATTACA";
@@ -40,6 +42,8 @@ export default function Home() {
           programación dinámica, traceback y explicación paso a paso.
         </p>
       </header>
+
+      <AlgorithmInfo />
 
       <section className={styles.controls}>
         <label className={styles.label}>
@@ -105,16 +109,8 @@ export default function Home() {
       )}
 
       <footer className={styles.footer}>
-        Hecho con Next.js. Basado en la idea de{" "}
-        <a
-          className={styles.footerLink}
-          href="https://bioboot.github.io/bimm143_W20/class-material/nw/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          bioboot.github.io/bimm143_W20
-        </a>
-        .
+        Hecho con Next.js. Creado para la entrega del final de Bioinformática
+        (UNAJ).
       </footer>
     </div>
   );

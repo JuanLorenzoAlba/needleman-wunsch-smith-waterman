@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState, type MouseEvent, type ReactNode } from "react";
-import { AlignResult, Cell, ScoreParams } from "@/lib/align";
-import styles from "@/styles/MatrixView.module.css";
-import AlignmentView from "./AlignmentView";
+import { useMemo, useState, type MouseEvent } from "react";
+import type { AlignResult } from "@/interfaces/align.interface";
+import { arrowsFor } from "@/helpers/format";
+import styles from "./matrixView.module.css";
+import AlignmentView from "../AlignmentView";
+import CellTooltip from "../CellTooltip";
 
 interface MatrixViewProps {
   title: string;
@@ -157,116 +159,6 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         </p>
         <AlignmentView alignedA={result.alignedA} alignedB={result.alignedB} />
       </div>
-    </div>
-  );
-}
-
-interface CellTooltipProps {
-  a: string;
-  b: string;
-  params: ScoreParams;
-  algorithm: "nw" | "sw";
-  matrix: Cell[][];
-  i: number;
-  j: number;
-  x: number;
-  y: number;
-  align: "left" | "right";
-}
-
-function CellTooltip({
-  a,
-  b,
-  params,
-  algorithm,
-  matrix,
-  i,
-  j,
-  x,
-  y,
-  align,
-}: CellTooltipProps) {
-  const cell = matrix[i][j];
-  const isEdge = i === 0 || j === 0;
-
-  const style = {
-    top: y,
-    ...(align === "left"
-      ? { left: x + 8 }
-      : { right: window.innerWidth - x + 8 }),
-  };
-
-  let edgeText = "";
-  if (isEdge) {
-    if (i === 0 && j === 0) edgeText = "Origen de la matriz.";
-    else if (algorithm === "nw")
-      edgeText = `Gap acumulado: ${i === 0 ? j : i} × ${params.gap} = ${cell.score}`;
-    else
-      edgeText =
-        "Fila/columna base en 0 (Smith-Waterman siempre arranca de nuevo en 0).";
-  }
-
-  const x1 = i > 0 ? a[i - 1] : "";
-  const y1 = j > 0 ? b[j - 1] : "";
-  const isMatch = x1 === y1;
-
-  return (
-    <div style={style} className={styles.tooltipBox}>
-      <p className={styles.tooltipTitle}>
-        H[{i}][{j}] = {cell.score}
-      </p>
-      {isEdge ? (
-        <p>{edgeText}</p>
-      ) : (
-        <div className={styles.tooltipGrid}>
-          <Quadrant label="Diagonal" active={cell.sources.includes("diag")}>
-            {matrix[i - 1][j - 1].score}{" "}
-            {fmtSigned(isMatch ? params.match : params.mismatch)} (
-            {isMatch ? "match" : "mismatch"} {x1}-{y1}) = {cell.diagVal}
-          </Quadrant>
-          <Quadrant label="Arriba" active={cell.sources.includes("up")}>
-            {matrix[i - 1][j].score} {fmtSigned(params.gap)} (gap) ={" "}
-            {cell.upVal}
-          </Quadrant>
-          <Quadrant label="Izquierda" active={cell.sources.includes("left")}>
-            {matrix[i][j - 1].score} {fmtSigned(params.gap)} (gap) ={" "}
-            {cell.leftVal}
-          </Quadrant>
-          <Quadrant label="Resultado" active>
-            {algorithm === "sw" && cell.score === 0
-              ? "Reinicia en 0"
-              : `Máximo = ${cell.score}`}
-          </Quadrant>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function arrowsFor(sources: Cell["sources"]) {
-  const symbol = { diag: "↖", up: "↑", left: "←" } as const;
-  return sources.map((m) => symbol[m]).join("");
-}
-
-function fmtSigned(n: number) {
-  return n >= 0 ? `+ ${n}` : `- ${Math.abs(n)}`;
-}
-
-function Quadrant({
-  label,
-  active,
-  children,
-}: {
-  label: string;
-  active: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <div
-      className={`${styles.quadrant} ${active ? styles.quadrantActive : styles.quadrantInactive}`}
-    >
-      <p className={styles.quadrantLabel}>{label}</p>
-      <p>{children}</p>
     </div>
   );
 }
