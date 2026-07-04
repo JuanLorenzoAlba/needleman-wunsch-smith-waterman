@@ -4,12 +4,11 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  /* Tipografía */
-  --font-sans:
-    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Tipografía (fuentes del sistema, sin depender de red en build) */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono:
-    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   /* Paleta base (no cambia con el tema) */
   --zinc-50: #fafafa;
