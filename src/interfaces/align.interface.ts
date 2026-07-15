@@ -8,7 +8,7 @@ export interface ScoreParams {
 
 export interface Cell {
   score: number;
-  sources: Move[]; // directions that achieve `score` (ties kept for explanation)
+  sources: Move[];
   diagVal: number | null;
   upVal: number | null;
   leftVal: number | null;
@@ -17,7 +17,7 @@ export interface Cell {
 export interface PathStep {
   i: number;
   j: number;
-  move: Move | null; // move taken to ARRIVE at (i,j), null for the path's start cell
+  move: Move | null;
 }
 
 export interface AlignResult {
@@ -29,7 +29,7 @@ export interface AlignResult {
   score: number;
   end: { i: number; j: number };
   start: { i: number; j: number };
-  path: PathStep[]; // ordered start -> end (forward, left to right)
+  path: PathStep[];
   alignedA: string;
   alignedB: string;
 }
