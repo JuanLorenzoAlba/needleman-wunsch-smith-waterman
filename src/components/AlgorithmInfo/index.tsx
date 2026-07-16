@@ -1,5 +1,7 @@
+// AlgorithmInfo es el acordeón de arriba de todo, con la explicación de cada algoritmo.
 import styles from "./algorithmInfo.module.css";
 
+// el texto fijo de Needleman-Wunsch y Smith-Waterman, guardado acá adentro
 const ITEMS = [
   {
     title: "Needleman-Wunsch (1970) — alineamiento global",

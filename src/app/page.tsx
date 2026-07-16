@@ -1,5 +1,6 @@
 "use client";
 
+// page.tsx (la pantalla principal) es el que junta todo.
 import { useMemo, useState } from "react";
 import { needlemanWunsch, smithWaterman } from "@/helpers/align";
 import type { ScoreParams } from "@/interfaces/align.interface";
@@ -11,8 +12,10 @@ const DEFAULT_A = "GATTACA";
 const DEFAULT_B = "GCATGCA";
 
 export default function Home() {
+  // lo que el usuario escribe: las dos secuencias y los tres valores de puntuación
   const [seqA, setSeqA] = useState(DEFAULT_A);
   const [seqB, setSeqB] = useState(DEFAULT_B);
+
   const [match, setMatch] = useState(1);
   const [mismatch, setMismatch] = useState(-1);
   const [gap, setGap] = useState(-2);
@@ -24,6 +27,7 @@ export default function Home() {
     [match, mismatch, gap],
   );
 
+  // cada vez que algo de eso cambia, se recalculan los dos resultados
   const nwResult = useMemo(
     () => (a && b ? needlemanWunsch(a, b, params) : null),
     [a, b, params],
@@ -35,6 +39,7 @@ export default function Home() {
 
   return (
     <div className={styles.root}>
+      {/* encabezado */}
       <header className={styles.header}>
         <h1 className={styles.title}>Needleman-Wunsch vs Smith-Waterman</h1>
         <p className={styles.subtitle}>
@@ -43,8 +48,10 @@ export default function Home() {
         </p>
       </header>
 
+      {/* acordeón de explicación */}
       <AlgorithmInfo />
 
+      {/* controles: secuencias y parámetros de puntuación */}
       <section className={styles.controls}>
         <label className={styles.label}>
           Secuencia A
@@ -93,6 +100,7 @@ export default function Home() {
         </label>
       </section>
 
+      {/* las dos matrices lado a lado, una por algoritmo */}
       {!a || !b ? (
         <p className={styles.emptyState}>
           Ingresá ambas secuencias para calcular los alineamientos.

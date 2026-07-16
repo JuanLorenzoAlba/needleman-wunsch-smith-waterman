@@ -1,3 +1,4 @@
+// CellTooltip es el cuadro flotante que aparece cuando pasás el mouse por una celda de la matriz.
 import type { Cell, ScoreParams } from "@/interfaces/align.interface";
 import { fmtSigned } from "@/helpers/format";
 import Quadrant from "../Quadrant";
@@ -9,11 +10,11 @@ interface CellTooltipProps {
   params: ScoreParams;
   algorithm: "nw" | "sw";
   matrix: Cell[][];
-  i: number;
+  i: number; // la celda puntual sobre la que estás parado
   j: number;
-  x: number;
+  x: number; // posición del mouse, para posicionarse pegado a él
   y: number;
-  align: "left" | "right";
+  align: "left" | "right"; // de qué lado abrirse para no salirse de la pantalla
 }
 
 export default function CellTooltip({
@@ -29,7 +30,7 @@ export default function CellTooltip({
   align,
 }: CellTooltipProps) {
   const cell = matrix[i][j];
-  const isEdge = i === 0 || j === 0;
+  const isEdge = i === 0 || j === 0; // celda del borde de la matriz: no tiene los 3 candidatos
 
   const style = {
     top: y,
@@ -38,6 +39,7 @@ export default function CellTooltip({
       : { right: window.innerWidth - x + 8 }),
   };
 
+  // si la celda es del borde, muestra un texto distinto explicando por qué
   let edgeText = "";
   if (isEdge) {
     if (i === 0 && j === 0) edgeText = "Origen de la matriz.";
@@ -60,6 +62,7 @@ export default function CellTooltip({
       {isEdge ? (
         <p>{edgeText}</p>
       ) : (
+        // muestra de dónde salió el puntaje: los 3 candidatos, uno por uno con el cálculo hecho
         <div className={styles.tooltipGrid}>
           <Quadrant label="Diagonal" active={cell.sources.includes("diag")}>
             {matrix[i - 1][j - 1].score}{" "}

@@ -1,8 +1,9 @@
+// AlignmentView muestra el resultado final: las dos secuencias ya alineadas, una debajo de la otra.
 import styles from "./alignmentView.module.css";
 
 interface AlignmentViewProps {
-  alignedA: string;
-  alignedB: string;
+  alignedA: string; // secuencia A ya armada (con guiones donde hay un espacio vacío)
+  alignedB: string; // secuencia B ya armada
 }
 
 const kindColor = {
@@ -18,6 +19,7 @@ export default function AlignmentView({
   if (!alignedA)
     return <p className={styles.empty}>Sin alineamiento todavía.</p>;
 
+  // compara letra por letra: coinciden, no coinciden, o hay un espacio vacío
   const cells = alignedA.split("").map((ca, idx) => {
     const cb = alignedB[idx];
     const kind =
@@ -31,7 +33,7 @@ export default function AlignmentView({
         {cells.map((c, idx) => (
           <span
             key={`a-${idx}`}
-            className={`${styles.cell} ${kindColor[c.kind]}`}
+            className={`${styles.cell} ${kindColor[c.kind]}`} // pinta de un color según coincidan o no
           >
             {c.ca}
           </span>
@@ -47,6 +49,7 @@ export default function AlignmentView({
           </span>
         ))}
       </div>
+      {/* referencia de qué significa cada color */}
       <div className={styles.legend}>
         <span className={styles.legendItem}>
           <span className={`${styles.swatch} ${kindColor.match}`} /> match
