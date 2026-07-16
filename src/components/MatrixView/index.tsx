@@ -1,5 +1,6 @@
 "use client";
 
+// MatrixView es el componente que dibuja la matriz de alineamiento como una tabla interactiva en pantalla.
 import { useMemo, useState, type MouseEvent } from "react";
 import type { AlignResult } from "@/interfaces/align.interface";
 import { arrowsFor } from "@/helpers/format";
@@ -9,7 +10,7 @@ import CellTooltip from "../CellTooltip";
 
 interface MatrixViewProps {
   title: string;
-  result: AlignResult;
+  result: AlignResult; // el resultado del algoritmo: matriz, secuencias, camino óptimo, score
 }
 
 interface HoverState {
@@ -24,11 +25,13 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
   const { a, b, matrix, path, params, algorithm, score } = result;
   const [hover, setHover] = useState<HoverState | null>(null);
 
+  // las celdas del camino óptimo (traceback), para resaltarlas con color
   const optimalSet = useMemo(
     () => new Set(path.map((s) => `${s.i},${s.j}`)),
     [path],
   );
 
+  // las celdas vecinas que se usaron para calcular la celda bajo el mouse
   const consideredSet = useMemo(() => {
     const s = new Set<string>();
     if (!hover || hover.i === 0 || hover.j === 0) return s;
@@ -59,6 +62,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         </span>
       </div>
 
+      {/* la matriz, renderizada como tabla HTML */}
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
           <thead>
@@ -82,9 +86,9 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
                 </th>
                 {row.map((cell, j) => {
                   const key = `${i},${j}`;
-                  const onOptimal = optimalSet.has(key);
+                  const onOptimal = optimalSet.has(key); // se resalta con color el camino óptimo
                   const isHovered = hover?.i === i && hover?.j === j;
-                  const isConsidered = consideredSet.has(key);
+                  const isConsidered = consideredSet.has(key); // celda vecina usada en el cálculo
                   const cls = [
                     styles.cellBase,
                     onOptimal ? styles.cellOptimal : "",
@@ -98,7 +102,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
                     <td
                       key={j}
                       className={cls}
-                      onMouseEnter={(e) => handleCellEnter(e, i, j)}
+                      onMouseEnter={(e) => handleCellEnter(e, i, j)} // al pasar el mouse, resalta vecinas y abre el tooltip
                       onMouseLeave={() => setHover(null)}
                     >
                       {cell.sources.length > 0 && (
@@ -138,6 +142,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         <span>↖ diagonal · ↑ arriba · ← izquierda (dirección ganadora)</span>
       </div>
 
+      {/* tooltip con el detalle de la cuenta de la celda hovereada */}
       {hover && (
         <CellTooltip
           a={a}
@@ -153,6 +158,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         />
       )}
 
+      {/* al pie: el resultado final, las dos secuencias ya alineadas */}
       <div>
         <p className={styles.alignmentLabel}>
           Alineamiento óptimo (traceback en rojo)
