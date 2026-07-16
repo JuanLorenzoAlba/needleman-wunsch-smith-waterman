@@ -196,22 +196,28 @@ function moveBetween(
 }
 
 function buildAlignment(a: string, b: string, path: PathStep[]) {
-  // construye las cadenas alineadas a partir del camino de alineamiento
   let alignedA = "";
   let alignedB = "";
+
+  // k=1 porque el primer elemento no tiene movimiento asociado
   for (let k = 1; k < path.length; k++) {
     const { move } = path[k];
-    const prev = path[k - 1];
+    const prev = path[k - 1]; // la letra viene de la casilla anterior, no de la actual
+
     if (move === "diag") {
+      // match o mismatch: avanzan las dos
       alignedA += a[prev.i];
       alignedB += b[prev.j];
     } else if (move === "up") {
+      // gap en B
       alignedA += a[prev.i];
       alignedB += "-";
     } else if (move === "left") {
+      // gap en A
       alignedA += "-";
       alignedB += b[prev.j];
     }
   }
+
   return { alignedA, alignedB };
 }
