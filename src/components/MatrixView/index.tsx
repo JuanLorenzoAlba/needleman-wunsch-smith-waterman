@@ -1,6 +1,5 @@
 "use client";
 
-// MatrixView es el componente que dibuja la matriz de alineamiento como una tabla interactiva en pantalla.
 import { useMemo, useState, type MouseEvent } from "react";
 import type { AlignResult } from "@/interfaces/align.interface";
 import { arrowsFor } from "@/helpers/format";
@@ -10,7 +9,7 @@ import CellTooltip from "../CellTooltip";
 
 interface MatrixViewProps {
   title: string;
-  result: AlignResult; // el resultado del algoritmo: matriz, secuencias, camino óptimo, score
+  result: AlignResult; // resultado completo del algoritmo: matriz, camino, score, secuencias
 }
 
 interface HoverState {
@@ -18,20 +17,20 @@ interface HoverState {
   j: number;
   x: number;
   y: number;
-  align: "left" | "right";
+  align: "left" | "right"; // lado en el que se abre el tooltip para no salirse de pantalla
 }
 
 export default function MatrixView({ title, result }: MatrixViewProps) {
   const { a, b, matrix, path, params, algorithm, score } = result;
   const [hover, setHover] = useState<HoverState | null>(null);
 
-  // las celdas del camino óptimo (traceback), para resaltarlas con color
+  // convierte el path en un Set para saber rápido si una celda está en el traceback
   const optimalSet = useMemo(
     () => new Set(path.map((s) => `${s.i},${s.j}`)),
     [path],
   );
 
-  // las celdas vecinas que se usaron para calcular la celda bajo el mouse
+  // las tres celdas vecinas de la celda bajo el mouse (las que se usaron para calcularla)
   const consideredSet = useMemo(() => {
     const s = new Set<string>();
     if (!hover || hover.i === 0 || hover.j === 0) return s;
@@ -48,6 +47,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
     j: number,
   ) {
     const r = e.currentTarget.getBoundingClientRect();
+    // decide si el tooltip se abre a la derecha o a la izquierda según el espacio disponible
     const align: "left" | "right" =
       r.right + 490 > window.innerWidth ? "right" : "left";
     setHover({ i, j, x: align === "left" ? r.right : r.left, y: r.top, align });
@@ -62,7 +62,6 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         </span>
       </div>
 
-      {/* la matriz, renderizada como tabla HTML */}
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
           <thead>
@@ -86,9 +85,11 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
                 </th>
                 {row.map((cell, j) => {
                   const key = `${i},${j}`;
-                  const onOptimal = optimalSet.has(key); // se resalta con color el camino óptimo
+                  const onOptimal = optimalSet.has(key);
                   const isHovered = hover?.i === i && hover?.j === j;
-                  const isConsidered = consideredSet.has(key); // celda vecina usada en el cálculo
+                  const isConsidered = consideredSet.has(key);
+
+                  // combina las clases según el estado de la celda
                   const cls = [
                     styles.cellBase,
                     onOptimal ? styles.cellOptimal : "",
@@ -98,13 +99,15 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
                         ? styles.cellConsidered
                         : "",
                   ].join(" ");
+
                   return (
                     <td
                       key={j}
                       className={cls}
-                      onMouseEnter={(e) => handleCellEnter(e, i, j)} // al pasar el mouse, resalta vecinas y abre el tooltip
+                      onMouseEnter={(e) => handleCellEnter(e, i, j)}
                       onMouseLeave={() => setHover(null)}
                     >
+                      {/* flecha que indica de dónde vino el máximo */}
                       {cell.sources.length > 0 && (
                         <span className={styles.arrow}>
                           {arrowsFor(cell.sources)}
@@ -120,6 +123,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         </table>
       </div>
 
+      {/* leyenda de colores */}
       <div className={styles.legend}>
         <span className={styles.legendItem}>
           <span
@@ -142,7 +146,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         <span>↖ diagonal · ↑ arriba · ← izquierda (dirección ganadora)</span>
       </div>
 
-      {/* tooltip con el detalle de la cuenta de la celda hovereada */}
+      {/* tooltip: aparece solo cuando hay una celda bajo el mouse */}
       {hover && (
         <CellTooltip
           a={a}
@@ -158,7 +162,7 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
         />
       )}
 
-      {/* al pie: el resultado final, las dos secuencias ya alineadas */}
+      {/* alineamiento final debajo de la matriz */}
       <div>
         <p className={styles.alignmentLabel}>
           Alineamiento óptimo (traceback en rojo)
