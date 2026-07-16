@@ -85,11 +85,12 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
                 </th>
                 {row.map((cell, j) => {
                   const key = `${i},${j}`;
-                  const onOptimal = optimalSet.has(key);
-                  const isHovered = hover?.i === i && hover?.j === j;
-                  const isConsidered = consideredSet.has(key);
 
-                  // combina las clases según el estado de la celda
+                  const onOptimal = optimalSet.has(key); // está en el traceback
+                  const isHovered = hover?.i === i && hover?.j === j; // es la celda bajo el mouse
+                  const isConsidered = consideredSet.has(key); // es vecina de la celda bajo el mouse
+
+                  // combina los estilos según el estado de la celda
                   const cls = [
                     styles.cellBase,
                     onOptimal ? styles.cellOptimal : "",
@@ -104,10 +105,10 @@ export default function MatrixView({ title, result }: MatrixViewProps) {
                     <td
                       key={j}
                       className={cls}
-                      onMouseEnter={(e) => handleCellEnter(e, i, j)}
-                      onMouseLeave={() => setHover(null)}
+                      onMouseEnter={(e) => handleCellEnter(e, i, j)} // abre el tooltip
+                      onMouseLeave={() => setHover(null)} // cierra el tooltip
                     >
-                      {/* flecha que indica de dónde vino el máximo */}
+                      {/* flecha que indica de dónde vino el máximo, solo si no es celda de borde */}
                       {cell.sources.length > 0 && (
                         <span className={styles.arrow}>
                           {arrowsFor(cell.sources)}
